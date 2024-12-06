@@ -1,0 +1,33 @@
+<% if @restaurant %>
+　<!-- 店名を表示 -->
+  <h1><%= @restaurant['name'] %></h1>
+
+  <!-- mobile画像でサイズ'l'を表示 -->
+  <% if @restaurant['photo'] && @restaurant['photo']['mobile'].present? %>
+    <img src="<%= @restaurant['photo']['mobile']['l'] %>" alt="<%= @restaurant['name'] %>" width="300">
+  <% else %>
+    <p>画像なし</p>
+  <% end %>
+
+  <p><strong>住所:</strong> <%= @restaurant['address'] %></p>
+  <p><strong>アクセス:</strong> <%= @restaurant['access'] %></p>
+  <p><strong>定休日:</strong> <%= @restaurant['close'] %></p>
+  <p><strong>営業時間:</strong> <%= @restaurant['open'] %></p>
+  <p><strong>URL:</strong> <a href="<%= @restaurant['urls']['pc'] %>" target="_blank">詳細情報はこちら</a></p>
+
+  <%# ブックマーク(実装したいがエラーが出るためコメントアウトしている) %>
+  
+  <%#<% if current_user.bookmarks.exists?(restaurant_id: @restaurant['id']) %>
+    <!-- ブックマーク済みのアイコン表示 -->
+    <%#<%= button_to image_tag('bookmark_icon_a.svg', alt: 'ブックマーク済み'), bookmark_path(@restaurant['id']), method: :delete, class: 'bookmark-button' %>
+  <%#<% else %>
+    <!-- ブックマークされていない場合 -->
+    <%#<%= button_to image_tag('bookmark_icon.svg', alt: 'ブックマーク'), bookmarks_path(restaurant_id: @restaurant['id']), method: :post, class: 'bookmark-button' %>
+  <%#<% end %>
+
+
+  <!-- 戻るボタン (前のページに戻る) -->
+  <button onclick="window.history.back()">検索結果に戻る</button>
+<% else %>
+  <p>店舗情報が見つかりませんでした。</p>
+<% end %>

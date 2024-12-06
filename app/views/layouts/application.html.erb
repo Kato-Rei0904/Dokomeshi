@@ -1,0 +1,112 @@
+<html lang="ja">
+  <head>
+    <title><%= content_for(:title) || "Dokomeshi" %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta charset="UTF-8">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%# スタイルシートの読み込み %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= stylesheet_link_tag 'home_index', media: 'all' %>
+    <%= stylesheet_link_tag 'search', media: 'all' %>
+
+    <%= yield :head %>
+
+    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%# javascriptのファイル読みこみ %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <%# restaurandsのときのみheader表示%>
+    <% if controller_path == "restaurants" %>
+
+      <%# ヘッダー要素%>
+      <header class='header'>
+        <div id="location-info">
+          <p>検索条件を入力してください。</p>
+          <form action="<%= restaurants_search_path %>" method="get" id="search-form">
+            <input type="hidden" id="latitude" name="latitude" value="<%= params[:latitude] %>">
+            <input type="hidden" id="longitude" name="longitude" value="<%= params[:longitude] %>">
+
+            <%# フリーワード検索 %>
+            <div class="form-group">
+              <label for="keyword">フリーワード:</label>
+              <input type="text" id="keyword" name="keyword" value="<%= params[:keyword] %>" placeholder="例: 店名, 焼肉, カフェ">
+            </div>
+
+            <%# 範囲検索 %>
+            <div class="form-group">
+              <label for="range">検索範囲（km）:</label>
+              <input type="number" id="range" name="range" value="<%= params[:range] || 5 %>" min="1" max="50">
+            </div>
+
+            <input type="submit" value="検索">
+          </form>
+        </div>
+      </header>
+    <% end %>
+
+    <%# メイン機能の表示枠 %>
+      <main>
+        <%= yield %>
+      </main>
+
+    <%# フッター要素 %>
+    <%# deviseの %>
+    <% unless (controller_path == "devise/sessions") || (controller_path == "devise/registrations") %>
+      <footer class="footer">
+        <div class="footer-icons">
+        　<%# ホームボタン %>
+          <%= link_to root_path, class: 'footer-icon-link' do %>
+            <%= image_tag 'home_icon.svg', alt: 'ホーム', class: 'footer-icon' %>
+          <% end %>
+
+          <%# ブックマーク閲覧ボタン %>
+          <%= link_to bookmarks_path, class: 'footer-icon-link' do %>
+            <%= image_tag 'bookmark_icon.svg', alt: 'ブックマーク', class: 'footer-icon' %>
+          <% end %>
+
+          <%# マイページボタン %>
+          <%= link_to user_mypage_path, class: 'footer-icon-link' do %>
+            <%= image_tag 'mypage_icon.svg', alt: 'マイページ', class: 'footer-icon' %>
+          <% end %>
+        </div>
+      </footer>
+    <% end %>
+
+    <script>
+      window.onload = function () {
+          if (!navigator.geolocation) {
+              return alert("このブラウザではGeolocationがサポートされていません。");
+          }
+
+          navigator.geolocation.getCurrentPosition(setLocationFields, handleLocationError);
+      };
+
+      // 現在地をフォームフィールドに設定
+      function setLocationFields(position) {
+          const { latitude, longitude } = position.coords;
+          document.getElementById('latitude').value = latitude;
+          document.getElementById('longitude').value = longitude;
+          document.getElementById('location-info').style.display = 'block';
+      }
+
+      // エラーハンドリング
+      function handleLocationError(error) {
+          alert(`現在地の取得に失敗しました: ${error.message}`);
+      }
+    </script>
+
+
+  </body>
+</html>

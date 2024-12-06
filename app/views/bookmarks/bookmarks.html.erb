@@ -1,0 +1,10 @@
+<h1>ブックマーク一覧</h1>
+
+<ul>
+  <% @bookmarked_restaurants.each do |bookmark| %>
+    <li>
+      <h3><%= link_to bookmark.restaurant_id, restaurant_path(bookmark.restaurant_id) %></h3>
+      <%= button_to '削除', bookmark_path(bookmark.id), method: :delete, class: "remove-bookmark" %>
+    </li>
+  <% end %>
+</ul>

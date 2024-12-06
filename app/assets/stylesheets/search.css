@@ -1,0 +1,126 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5e1b4;  /* 薄い橙色背景 */
+    margin: 0;
+    padding: 0;
+  }
+  
+  main {
+    padding: 20px;
+    top: 0;
+    max-width: 1200px;
+    margin: 60 auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* タイトル */
+  h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ff7f32;  /* 橙色 */
+    margin-bottom: 20px;
+  }
+  
+  /* 検索結果のリスト */
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    border-bottom: 1px solid #f2a300;  /* 橙色の境界線 */
+    padding: 15px;
+    display: flex;
+    flex-direction: column; /* 要素を縦に並べる */
+    align-items: flex-start; /* 左寄せにする */
+    background-color: #fff7e0;  /* 薄い橙色背景 */
+    border-radius: 6px;
+    margin-bottom: 10px;
+  }
+  
+  /* 店舗名 */
+  h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0;
+    text-align: left;
+    flex-grow: 1;
+    margin-right: 15px;
+  }
+  
+  h3 a {
+    text-decoration: none;
+    color: #ff7f32;  /* 橙色 */
+  }
+  
+  h3 a:hover {
+    color: #ff5722;  /* 濃い橙色 */
+  }
+  
+  /* 店舗画像 */
+  img {
+    max-width: 150px;
+    height: auto;
+    margin-right: 15px;
+    border-radius: 8px;
+  }
+  
+  p {
+    font-size: 0.9rem;
+    margin: 5px 0;
+    color: #555;
+  }
+  
+  /* ブックマークアイコン */
+  form {
+    display: inline-block;
+  }
+  
+  form img {
+    width: 30px;  
+    height: 30px;
+    cursor: pointer;
+    filter: grayscale(100%);
+    transition: filter 0.3s ease;
+  }
+  
+  form img:hover {
+    opacity: 0.8;
+    filter: grayscale(0%);
+  }
+  
+  /* ページネーション */
+  .pagination {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .pagination a {
+    text-decoration: none;
+    padding: 10px;
+    background-color: #ff7f32;  /* 橙色 */
+    color: white;
+    border-radius: 4px;
+  }
+  
+  .pagination a:hover {
+    background-color: #ff5722;  /* 濃い橙色 */
+  }
+  
+  .pagination a:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+  }
+  
+  /* 位置情報を表示するエリア */
+  #location-info {
+    background-color: #ffe0b3;  /* 柔らかい橙色 */
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 5px;
+    display: none;
+  }
+  

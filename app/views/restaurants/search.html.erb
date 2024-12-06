@@ -1,0 +1,89 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+  </head>
+
+  <body>
+    <main>
+        <%# 検索結果の表示 %>
+        <h2>検索結果 (全<%= @results_available %>件, 表示件数<%= @results_returned %>件)</h2>
+        <% if @restaurants.present? %>
+            <ul>
+                <% @restaurants.each_with_index do |restaurant, index| %>
+                <li>
+                    <%# 店名を表示 %>
+                    <h3><%= link_to restaurant['name'], restaurant_path(restaurant['id']) %></h3>
+
+                    <!-- mobile画像でサイズ's'を表示 -->
+                    <% if restaurant['photo'] && restaurant['photo']['mobile'].present? %>
+                        <img src="<%= restaurant['photo']['mobile']['s'] %>" alt="<%= restaurant['name'] %>" >
+                    <% else %>
+                        <p>画像なし</p>
+                    <% end %>
+                    
+                    <p><%= restaurant['address'] %></p>
+                    <p>アクセス: <%= restaurant['access'] %></p>
+
+                    <%# ブックマーク %>
+                    <%= form_with url: bookmarks_path, method: :post, local: true do %>
+                        <%= hidden_field_tag :restaurant_id, restaurant['id'] %>
+                        
+                        <% if current_user.bookmarks.exists?(restaurant_id: restaurant['id']) %>
+                            <%= image_tag 'bookmark_icon_a.svg', alt: "ブックマーク済み", class: "bookmark-icon" %>
+                            <%= button_to 'ブックマークを削除', bookmark_path(id: restaurant['id']), method: :delete, class: "remove-bookmark" %>
+                        <% else %>
+                            <%= image_tag 'bookmark_icon.svg', alt: "ブックマーク", class: "bookmark-icon" %>
+                            <%= submit_tag 'ブックマークする', class: "add-bookmark" %>
+                        <% end %>
+
+                    <% end %>
+
+                </li>
+                <% end %>
+            </ul>
+            <% else %>
+
+            <%# 該当する店舗が無い場合 %>
+            <p>該当店舗がありませんでした。</p>
+
+        <% end %>
+
+        
+        <%# ページネーション %>
+        <div class="pagination">
+            <% if @current_start > 1 %>
+                <%= link_to '前のページ', restaurants_search_path(start: @current_start - 10, count: params[:count], latitude: params[:latitude], longitude: params[:longitude], range: params[:range]) %>
+            <% end %>
+
+            <% if (@current_start + @results_returned) < @results_available %>
+                <%= link_to '次のページ', restaurants_search_path(start: @current_start + 10, count: params[:count], latitude: params[:latitude], longitude: params[:longitude], range: params[:range]) %>
+            <% end %>
+        </div>
+    </main>
+
+    <script>
+      window.onload = function () {
+          if (!navigator.geolocation) {
+              return alert("このブラウザではGeolocationがサポートされていません。");
+          }
+
+          navigator.geolocation.getCurrentPosition(setLocationFields, handleLocationError);
+      };
+
+      // 現在地をフォームフィールドに設定
+      function setLocationFields(position) {
+          const { latitude, longitude } = position.coords;
+          document.getElementById('latitude').value = latitude;
+          document.getElementById('longitude').value = longitude;
+          document.getElementById('location-info').style.display = 'block';
+      }
+
+      // エラーハンドリング
+      function handleLocationError(error) {
+          alert(`現在地の取得に失敗しました: ${error.message}`);
+      }
+    </script>
+
+
+  </body>
+</html>

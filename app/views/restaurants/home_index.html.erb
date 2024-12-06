@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    
+  </head>
+  <body>
+
+    <main>
+    　<%# 現在地周辺の飲食店を検索%>
+      <h1>現在地周辺のおすすめ</h1>
+      <% if @restaurants.present? %>
+        <ul>
+          <% @restaurants.each do |restaurant| %>
+            <li>
+              <h3><%= link_to restaurant['name'], restaurant_path(restaurant['id']) %></h3>
+              <% if restaurant['photo'] && restaurant['photo']['mobile'].present? %>
+                <img src="<%= restaurant['photo']['mobile']['s'] %>" alt="<%= restaurant['name'] %>">
+              <% else %>
+                <p>画像なし</p>
+              <% end %>
+              <p><%= restaurant['address'] %></p>
+              <p>アクセス: <%= restaurant['access'] %></p>
+              <p>距離: <%= restaurant['distance'] %> km</p>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p>該当するレストランがありませんでした。</p>
+      <% end %>
+    </main>
+
+    <script>
+    // 現在地を取得していない場合、もしくは検索が行われていない場合の処理
+    
+      document.addEventListener('DOMContentLoaded', () => {
+          if (shouldFetchLocation() && navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(updateURLWithLocation, handleLocationError);
+          }
+      });
+
+      // 現在地取得が必要か判定
+      function shouldFetchLocation() {
+          const params = new URLSearchParams(window.location.search);
+          const hasLatitude = params.has('latitude');
+          const hasLongitude = params.has('longitude');
+          const hasRestaurants = document.querySelector('ul') !== null; // レストランリストが存在するか確認
+
+          return !hasLatitude || !hasLongitude || !hasRestaurants;
+      }
+
+      // 現在地をURLに追加してリロード
+      function updateURLWithLocation(position) {
+          const { latitude, longitude } = position.coords;
+          const url = new URL(window.location.href);
+          url.searchParams.set('latitude', latitude);
+          url.searchParams.set('longitude', longitude);
+          window.location.href = url; // ページをリロード
+      }
+
+      // 位置情報取得失敗時の処理
+      function handleLocationError(error) {
+          alert(`現在地の取得に失敗しました: ${error.message}`);
+      }
+    </script>
+
+
+  </body>
+</html>

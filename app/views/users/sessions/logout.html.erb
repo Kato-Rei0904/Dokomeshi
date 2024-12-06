@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ログアウト</title>
+    <link rel="stylesheet" href="<%= asset_path 'logout.css' %>">
+    </head>
+    <body>
+    <div class="logout-container">
+        <h1>ログアウト</h1>
+        <p>本当にログアウトしますか？</p>
+        <div class="logout-buttons">
+        <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "logout-button" %>
+        <%= link_to "キャンセル", root_path, class: "cancel-button" %>
+        </div>
+    </div>
+    </body>
+</html>

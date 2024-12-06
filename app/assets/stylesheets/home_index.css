@@ -1,0 +1,95 @@
+/* 全体の設定 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5e1b4; /* 薄い橙色背景 */
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    padding: 0px;
+    top: 100;
+    max-width: 1200px;
+    margin: 120px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* タイトル */
+h1 {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #ff7f32; /* 橙色 */
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* 検索結果リスト */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    border: 1px solid #f2a300; /* 橙色のボーダー */
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #fff7e0; /* 薄い橙色背景 */
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+/* 店舗名 */
+li h3 {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin: 0 0 10px 0;
+    color: #ff7f32; /* 橙色 */
+}
+
+li h3 a {
+    text-decoration: none;
+    color: #ff7f32; /* 橙色 */
+}
+
+li h3 a:hover {
+    color: #ff5722; /* 濃い橙色 */
+}
+
+/* 店舗画像 */
+li img {
+    max-width: 150px;
+    height: auto;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
+/* 店舗情報 */
+li p {
+    font-size: 0.9rem;
+    margin: 5px 0;
+    color: #555;
+}
+
+/* 該当なしメッセージ */
+main > p {
+    font-size: 1rem;
+    text-align: center;
+    color: #ff5722; /* 濃い橙色 */
+    background-color: #ffe0b3; /* 柔らかい橙色 */
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* 位置情報エリア（必要に応じて） */
+#location-info {
+    background-color: #ffe0b3; /* 柔らかい橙色 */
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 5px;
+    display: none;
+}

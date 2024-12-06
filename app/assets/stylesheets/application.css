@@ -1,0 +1,76 @@
+/*
+ * This is a manifest file that'll be compiled into application.css.
+ *
+ * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
+ * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
+ * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
+ * depending on specificity.
+ *
+ * Consider organizing styles into separate files for maintainability.
+ */
+
+ body, html {
+    margin: 0;
+    padding: 0;
+    -webkit-text-size-adjust: none; /* 古いブラウザ用 */
+    text-size-adjust: none;         /* 最新ブラウザ用 */
+  }
+  
+  /* ヘッダー要素のCSS */
+  .header {
+    position: fixed; /* スクロールで移動しないよう固定 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 5000;
+    background-color: #fff; /* ヘッダーの背景色を設定 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 影を追加 */
+  }
+
+  .form-group {
+    margin-bottom: 5px; /* 各入力フィールド間の余白を設定 */
+  }
+  
+  label {
+    font-weight: bold;   /* ラベルを強調 */
+  }
+  
+  input {
+    border: 1px solid #ccc; /* 境界線 */
+    border-radius: 4px;  /* 角丸を追加 */
+    box-sizing: border-box; /* 境界線を含めて幅を計算 */
+  }
+  
+  
+
+  /* フッター要素のCSS */
+ .footer {
+    position: fixed; /* スクロールで移動しないよう固定 */
+    bottom: 0;
+    width: 100%;
+    background-color: #fff;
+    border-top: 1px solid #ccc;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+    z-index: 5000;
+  }
+  
+  .footer-icons {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    max-width: 400px;
+    margin: 0 -20;
+  }
+  
+  .footer-icon-link {
+    display: inline-block;
+    text-align: center;
+  }
+  
+  .footer-icon {
+    width: 24px; /* アイコンのサイズを調整 */
+    height: 24px;
+  }
+  
