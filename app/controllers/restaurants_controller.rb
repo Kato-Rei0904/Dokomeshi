@@ -5,6 +5,7 @@ class RestaurantsController < ApplicationController
 
   # ホーム画面
   def home_index
+    
     # 緯度と経度を数値として取得
     latitude = params[:latitude].to_f
     longitude = params[:longitude].to_f

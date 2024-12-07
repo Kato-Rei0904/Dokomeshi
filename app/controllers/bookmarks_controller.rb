@@ -1,6 +1,8 @@
 class BookmarksController < ApplicationController
+  # ログインしていることを確認
   before_action :authenticate_user!
 
+  # ブックマーク追加
   def create
     bookmark = current_user.bookmarks.create(restaurant_id: params[:restaurant_id])
     if bookmark.persisted?
@@ -10,6 +12,7 @@ class BookmarksController < ApplicationController
     end
   end
 
+  # ブックアーク削除
   def destroy
     bookmark = current_user.bookmarks.find_by(restaurant_id: params[:restaurant_id])
     if bookmark&.destroy

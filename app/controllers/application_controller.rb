@@ -16,8 +16,9 @@ class ApplicationController < ActionController::Base
   end
 
   
-  # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
+  # Webp画像、Webプッシュ、バッジ、インポートマップ、CSSネスティング、CSS :hasをサポートするモダンブラウザのみ許可
   allow_browser versions: :modern
 
+  # ログイン確認
   before_action :authenticate_user!
 end
