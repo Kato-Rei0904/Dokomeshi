@@ -5,7 +5,7 @@ class RestaurantsController < ApplicationController
 
   # ホーム画面
   def home_index
-    
+
     # 緯度と経度を数値として取得
     latitude = params[:latitude].to_f
     longitude = params[:longitude].to_f
@@ -88,6 +88,7 @@ class RestaurantsController < ApplicationController
 
     # 現在のお気に入り店舗を取得
     @bookmarked_restaurants = session[:bookmarked_restaurants] || []
+
     # データが正しく取得されているか確認
     if data['results'] && data['results']['shop'].present?
       @restaurant = data['results']['shop'].first
@@ -95,9 +96,9 @@ class RestaurantsController < ApplicationController
       @restaurant = nil
     end
 
+    # フォーマットの設定
     respond_to do |format|
       format.html
-      # 他のフォーマットをサポートする場合
       format.json { render json: @data }
     end
   end

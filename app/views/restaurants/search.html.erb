@@ -9,6 +9,7 @@
         <h2>検索結果 (全<%= @results_available %>件, 表示件数<%= @results_returned %>件)</h2>
         <% if @restaurants.present? %>
             <ul>
+                <%# 取得したレストラン情報1つずつ処理 %>
                 <% @restaurants.each_with_index do |restaurant, index| %>
                 <li>
                     <%# 店名を表示 %>
@@ -37,11 +38,10 @@
                         <% end %>
 
                     <% end %>
-
                 </li>
                 <% end %>
             </ul>
-            <% else %>
+        <% else %>
 
             <%# 該当する店舗が無い場合 %>
             <p>該当店舗がありませんでした。</p>

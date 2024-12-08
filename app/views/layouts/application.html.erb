@@ -62,10 +62,11 @@
       </main>
 
     <%# フッター要素 %>
-    <%# deviseの %>
+    <%# deviseのsessionsとregistrations意外の画面で表示する %>
     <% unless (controller_path == "devise/sessions") || (controller_path == "devise/registrations") %>
       <footer class="footer">
         <div class="footer-icons">
+        
         　<%# ホームボタン %>
           <%= link_to root_path, class: 'footer-icon-link' do %>
             <%= image_tag 'home_icon.svg', alt: 'ホーム', class: 'footer-icon' %>
